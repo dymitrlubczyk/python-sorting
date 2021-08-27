@@ -2,11 +2,12 @@ import numpy as np
 from numpy.testing import assert_array_equal
 import unittest
 import sys
+import constants
 
 sys.path.append(
     '/Users/dymitrlubczyk/Repositories/python-algorithms/sorting/src')
 from quicksort import partition, quickSort
-from common import generate
+from common import checkTestCases
 
 
 class TestQuicksort(unittest.TestCase):
@@ -40,32 +41,7 @@ class TestQuicksort(unittest.TestCase):
         assert_array_equal(array, expected)
 
     def test_quickSort(self):
-        array = np.array([])
-        assert_array_equal(quickSort(array, 0, array.size), np.sort(array))
-
-        array = np.array([2, 1, 3])
-        assert_array_equal(quickSort(array, 0, array.size), np.sort(array))
-
-        array = np.array([1, 1, 1])
-        assert_array_equal(quickSort(array, 0, array.size), np.sort(array))
-
-        array = np.array([6, 2, 4, 8, 2, 1, 3, 4, 5])
-        assert_array_equal(quickSort(array, 0, array.size), np.sort(array))
-
-        array = np.array([1, 2, 3, 4, 5])
-        assert_array_equal(quickSort(array, 0, array.size), np.sort(array))
-
-        array = np.array([5, 4, 3, 2, 1])
-        assert_array_equal(quickSort(array, 0, array.size), np.sort(array))
-
-        array = generate(100)
-        assert_array_equal(quickSort(array, 0, array.size), np.sort(array))
-
-        array = generate(1000)
-        assert_array_equal(quickSort(array, 0, array.size), np.sort(array))
-
-        array = generate(10000)
-        assert_array_equal(quickSort(array, 0, array.size), np.sort(array))
+        checkTestCases(constants.testCases, quickSort)
 
 
 if __name__ == '__main__':
