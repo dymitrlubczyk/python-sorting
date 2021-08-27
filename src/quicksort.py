@@ -2,20 +2,21 @@ import numpy as np
 from common import swap
 
 
-def quickSort(array, l, r):
-    if (l < r):
-        pivot, array = partition(array, l, r)
-        quickSort(array, l, pivot)
-        quickSort(array, pivot + 1, r)
+def quickSort(array):
+    if (array.size <= 1):
+        return array
 
-    return array
+    pivot, array = partition(array)
+    left = quickSort(array[:pivot])
+    right = quickSort(array[pivot + 1:])
+    return np.concatenate((left, array[pivot], right), axis=None)
 
 
-def partition(array, l, r):
-    pivot = array[r - 1]
-    current = l - 1
+def partition(array):
+    pivot = array[array.size - 1]
+    current = -1
 
-    for i in range(l, r):
+    for i in range(array.size):
         if (array[i] <= pivot):
             current += 1
             array = swap(array, i, current)

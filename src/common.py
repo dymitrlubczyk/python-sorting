@@ -16,22 +16,26 @@ def swap(array, i, j):
     return array
 
 
-def measureTime(sort, array, size, name):
+def measureTime(array, sort, name):
     start = time.time()
-    sort(array, 0, size)
+    sorted = sort(array)
     end = time.time()
-    print(f'{name} time: {round(1000*(end-start))}ms')
+
+    if (isSorted(sorted)):
+        print(f'{name} time: {round(1000*(end-start))}ms')
+    else:
+        print(f'{name} has not sorted properly: disqualification')
 
 
-def isSorted(array, size):
-    for i in range(size):
+def isSorted(array):
+    for i in range(array.size - 1):
         if (array[i] > array[i + 1]):
             return False
     return True
 
 
-def checkTestCases(testCaseArray, sortingAlgorithm):
+def checkTestCases(testCaseArray, sort):
     for testCase in testCaseArray:
         expected = np.sort(testCase)
-        actual = sortingAlgorithm(testCase, 0, testCase.size)
+        actual = sort(testCase)
         assert_array_equal(actual, expected)
